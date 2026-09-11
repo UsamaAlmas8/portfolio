@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usama Almas AI/ML Engineer</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP 3 & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll CDN -->
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Centralized Cyan/Indigo Dark Theme CSS & Pro Animations -->
+  <style>
+    /* ============================================== */
+    /* 1. CENTRALIZED CSS COLOR VARIABLES (CYAN/DARK) */
+    /* ============================================== */
+    :root {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+      /* Deep Elegant Dark Backgrounds */
+      --bg-primary: #060913;
+      /* Rich deep obsidian space background */
+      --bg-secondary: #0c1222;
+      /* Midnight elevated background */
+      --bg-card: rgba(12, 18, 34, 0.72);
+      /* Translucent obsidian glass */
+      --bg-card-hover: rgba(18, 28, 54, 0.85);
+
+      /* High-Contrast Soft Text Colors */
+      --text-primary: #f8fafc;
+      /* Crisp primary white */
+      --text-secondary: #94a3b8;
+      /* Elegant readable slate */
+      --text-muted: #64748b;
+      /* Muted secondary metadata */
+
+      /* Premium Developer Accents */
+      --accent-primary: #38bdf8;
+      /* Electric Cyan / Sky */
+      --accent-secondary: #818cf8;
+      /* Luminous Indigo / Violet */
+      --accent-tertiary: #34d399;
+      /* Emerald Cyber Green */
+      --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #34d399 100%);
+      --accent-glow: rgba(56, 189, 248, 0.16);
+
+      /* Borders & Shadows */
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-color-hover: rgba(56, 189, 248, 0.35);
+      --shadow-color: rgba(0, 0, 0, 0.6);
+      --shadow-card: 0 15px 35px -10px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #080c18;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    /* Gradient Shift Animation */
+    .animate-gradient-shift {
+      background-size: 200% 200%;
+      animation: gradient-shift 6s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Floating Ambient Gradient Blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(95px);
+      opacity: 0.45;
+      animation: float-blob 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes float-blob {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(25px, -20px) scale(1.08);
+      }
+
+      100% {
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+    }
+
+    /* Custom Cursor Styles */
+    #cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-primary);
+      box-shadow: 0 0 10px var(--accent-primary);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.2, 0, 0, 1), height 0.3s cubic-bezier(0.2, 0, 0, 1), border-color 0.3s ease, background-color 0.3s ease, transform 0.15s ease-out;
+    }
+
+    .cursor-active #cursor-ring {
+      width: 58px;
+      height: 58px;
+      border-color: rgba(129, 140, 248, 0.7);
+      background-color: rgba(129, 140, 248, 0.12);
+      backdrop-filter: blur(2px);
+    }
+
+    .cursor-active #cursor-dot {
+      background-color: var(--accent-secondary);
+      box-shadow: 0 0 14px var(--accent-secondary);
+      transform: translate(-50%, -50%) scale(1.4);
+    }
+
+    @media (pointer: coarse),
+    (max-width: 768px) {
+
+      #cursor-dot,
+      #cursor-ring {
+        display: none !important;
+      }
+    }
+
+    /* 3D Spotlight Tilt Cards */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: box-shadow 0.4s ease, border-color 0.3s ease, background-color 0.3s ease, transform 0.25s ease;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+    }
+
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.12), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    .spotlight-card:hover {
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.8), 0 0 30px -8px rgba(56, 189, 248, 0.15);
+      border-color: var(--border-color-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Timeline Styling */
+    .timeline-track {
+      position: absolute;
+      left: 16px;
+      top: 24px;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 9999px;
+    }
+
+    .timeline-progress-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+      border-radius: 9999px;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+    }
+
+    .timeline-dot-wrapper {
+      position: absolute;
+      left: -33px;
+      top: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-dot-pulse {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      opacity: 0.7;
+      animation: pulse-ring 2.2s cubic-bezier(0.2, 0, 0, 1) infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    /* Badge glow effect */
+    .badge-glow {
+      position: relative;
+    }
+
+    .badge-glow::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      z-index: -1;
+      opacity: 0.35;
+      filter: blur(5px);
+    }
+
+    /* Button Micro-interactions */
+    .btn-interaction {
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease;
+    }
+
+    .btn-interaction:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Navbar Scrolled Transition */
+    .navbar-container {
+      transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .navbar-scrolled {
+      background-color: rgba(10, 15, 29, 0.95) !important;
+      border-color: rgba(56, 189, 248, 0.25) !important;
+      box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.85) !important;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-[#060913] text-slate-100 antialiased selection:bg-sky-500/30 selection:text-sky-200 overflow-x-hidden relative">
+
+  <!-- =============================== -->
+  <!-- 0. PRO CUSTOM CURSOR & PROGRESS -->
+  <!-- =============================== -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div id="scroll-progress"
+    class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-sky-400 via-indigo-400 to-emerald-400 z-[99999] w-0 pointer-events-none transition-all duration-75 shadow-[0_0_8px_rgba(56,189,248,0.7)]">
+  </div>
+
+  <!-- Background Ambient Floating Light Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div
+      class="blob w-[460px] h-[460px] bg-gradient-to-br from-sky-600/15 via-blue-600/10 to-transparent top-[-80px] left-[-100px]">
+    </div>
+    <div
+      class="blob w-[500px] h-[500px] bg-gradient-to-tr from-indigo-600/12 via-purple-600/10 to-transparent top-[32%] right-[-140px]"
+      style="animation-delay: -3s;"></div>
+    <div
+      class="blob w-[420px] h-[420px] bg-gradient-to-bl from-emerald-600/10 via-teal-600/10 to-transparent bottom-[10%] left-[8%]"
+      style="animation-delay: -6s;"></div>
+  </div>
+
+  <!-- =============================== -->
+  <!-- 1. HEADER SECTION               -->
+  <!-- =============================== -->
+
+  <header id="main-header" class="pt-3 sm:pt-6 px-3 sm:px-4 fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <div
+      class="navbar-container max-w-7xl mx-auto bg-[#0a0f1d]/90 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.55)] rounded-2xl border border-white/[0.08] relative">
+
+      <!-- Top Bar -->
+      <div class="flex items-center justify-between py-2.5 sm:py-3 px-3 sm:px-6">
+
+        <!-- Left: Logo & Brand -->
+        <a href="#" class="flex items-center flex-shrink-0 gap-2.5 group">
+
+          <div class="flex items-center gap-2.5 shrink-0">
+            <!-- Profile Picture -->
+            <div
+              class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-slate-700 overflow-hidden shadow-sm hidden md:block ring-1 ring-sky-500/30 shrink-0">
+              <img src="https://zuhaibbutt.vercel.app/profile.png" alt="Profile" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Name -->
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 font-extrabold text-base sm:text-lg tracking-tight">
+              Usama Almas
+            </span>
+          </div>
+        </a>
+
+        <!-- Center: Socials (Desktop Only) -->
+        <div class="hidden lg:flex items-center gap-2 mx-4">
+          <a href="mailto:usamaalmas8@gmail.com" title="Email Me"
+            class="p-2.5 bg-white/[0.05] hover:bg-sky-500/15 backdrop-blur-sm border border-white/[0.08] hover:border-sky-400/50 rounded-full shadow-sm text-sky-400 hover:scale-105 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </a>
+          <a href="https://wa.me/923249744027" target="_blank" rel="noreferrer" title="WhatsApp"
+            class="p-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 backdrop-blur-sm border border-emerald-500/30 hover:border-emerald-400/50 rounded-full shadow-sm text-emerald-400 hover:scale-105 transition-all">
+            <svg class="fill-current" viewBox="0 0 24 24" width="18" height="18">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488">
+              </path>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/usamaalmas8/" target="_blank" rel="noreferrer" title="LinkedIn"
+            class="p-2.5 bg-indigo-500/10 hover:bg-indigo-500/20 backdrop-blur-sm border border-indigo-500/30 hover:border-indigo-400/50 rounded-full shadow-sm text-indigo-400 hover:scale-105 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect width="4" height="12" x="2" y="9"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="https://www.fiverr.com/usamaalmas8" target="_blank" rel="noreferrer" title="Fiverr"
+            class="p-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 backdrop-blur-sm border border-emerald-500/30 hover:border-emerald-400/50 rounded-full shadow-sm text-emerald-400 hover:scale-105 transition-all">
+            <svg class="fill-current" viewBox="0 0 24 24" width="18" height="18">
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10zm-1-6v2h2v-2h1a2.5 2.5 0 1 0 0-5h-4a.5.5 0 1 1 0-1h5a2.5 2.5 0 0 1 0 5h-1zm-6-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0-1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z">
+              </path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Right: Action Buttons (Always Visible & Responsive) -->
+        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <!-- PDF Button -->
+          <button title="Download PDF"
+            class="flex items-center justify-center h-8 sm:h-9 px-2.5 sm:px-3 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg sm:rounded-xl text-xs font-medium text-slate-200 hover:text-white transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="text-sky-400 sm:mr-1.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" x2="12" y1="15" y2="3"></line>
+            </svg>
+            <span class="hidden sm:inline">PDF</span>
+          </button>
+
+          <!-- Print Button -->
+          <button onclick="window.print()" title="Print"
+            class="hidden sm:flex items-center justify-center h-8 sm:h-9 px-2.5 sm:px-3 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg sm:rounded-xl text-xs font-medium text-slate-200 hover:text-white transition-all">
+            <svg class="w-3.5 h-3.5 text-sky-400 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+              </path>
+            </svg>
+            <span>Print</span>
+          </button>
+
+          <!-- Hire Me Button -->
+          <a href="#contact"
+            class="flex items-center justify-center h-8 sm:h-9 px-3 sm:px-3.5 bg-gradient-to-r from-sky-500 to-indigo-600 text-white rounded-lg sm:rounded-xl text-xs font-semibold shadow-md shadow-sky-500/20 hover:shadow-sky-500/35 transition-all shrink-0">
+            <span class="flex items-center gap-1">
+              Hire
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Mobile Drawer Toggle Button (Only on Mobile/Tablet) -->
+          <button onclick="document.getElementById('mobile-drawer').classList.toggle('hidden')"
+            class="lg:hidden flex items-center justify-center h-8 w-8 text-slate-300 hover:text-white bg-white/[0.06] border border-white/[0.1] rounded-lg ml-0.5 sm:ml-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Drawer (Only Social Links - Stats completely removed) -->
+      <div id="mobile-drawer"
+        class="hidden lg:hidden border-t border-white/[0.08] px-4 py-3 bg-[#070b16]/95 rounded-b-2xl">
+        <div class="flex items-center justify-around">
+          <a href="mailto:usamaalmas8@gmail.com"
+            class="text-xs text-slate-300 hover:text-sky-400 flex items-center gap-1.5 transition-colors">
+            <span>📧</span> Email
+          </a>
+          <a href="https://wa.me/923249744027" target="_blank" rel="noreferrer"
+            class="text-xs text-slate-300 hover:text-emerald-400 flex items-center gap-1.5 transition-colors">
+            <span>🟢</span> WhatsApp
+          </a>
+          <a href="https://www.linkedin.com/in/usamaalmas8/" target="_blank" rel="noreferrer"
+            class="text-xs text-slate-300 hover:text-indigo-400 flex items-center gap-1.5 transition-colors">
+            <span>🔵</span> LinkedIn
+          </a>
+          <a href="https://www.fiverr.com/usamaalmas8" target="_blank" rel="noreferrer"
+            class="text-xs text-slate-300 hover:text-emerald-400 flex items-center gap-1.5 transition-colors">
+            <span>🟢</span> Fiverr
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-24">
+    <!-- =============================== -->
+    <!-- 2. MAIN HERO SECTION            -->
+    <!-- =============================== -->
+    <section id="hero" class="relative max-w-7xl mx-auto px-4 py-12 lg:py-20 overflow-hidden">
+
+      <div class="relative z-10">
+        <!-- Status Badge -->
+        <div class="text-center mb-6 hero-anim">
+          <div
+            class="inline-flex items-center gap-2.5 px-4 py-2 bg-sky-950/40 backdrop-blur-md text-sky-300 text-sm font-semibold rounded-full shadow-sm border border-sky-500/30 badge-glow">
+            <span class="relative flex h-2.5 w-2.5">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+            </span>
+            <span>Available for Freelance & Consultation Projects</span>
+          </div>
+        </div>
+
+        <!-- Headline -->
+        <h1
+          class="hero-anim text-center text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-[1.2] tracking-tight">
+          <span class="block text-slate-300 text-2xl sm:text-3xl font-semibold mb-2">
+            Hello, I'm Zuhaib Hussain Butt
+          </span>
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+            Senior Data Scientist • AI/ML Engineer
+          </span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p
+          class="hero-anim text-center text-slate-400 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+          Driving AI Innovation, Data-Centric Business Strategy, and Next-Gen Predictive Analytics with cutting-edge
+          Machine Learning & LLM systems.
+        </p>
+
+        <!-- Hero Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center mt-6">
+          <div class="lg:col-span-2">
+
+            <!-- Skill Badges -->
+            <div class="hero-anim flex flex-wrap gap-2.5 mb-8 justify-center lg:justify-start">
+              <span
+                class="magnetic-btn btn-interaction flex items-center gap-2 px-4 py-2 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl shadow-sm text-xs sm:text-sm font-semibold text-slate-300 hover:border-sky-400/50 hover:text-sky-300 hover:bg-sky-500/10 transition-all">
+                <span>🧠</span> ML & Deep Learning
+              </span>
+              <span
+                class="magnetic-btn btn-interaction flex items-center gap-2 px-4 py-2 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl shadow-sm text-xs sm:text-sm font-semibold text-slate-300 hover:border-indigo-400/50 hover:text-indigo-300 hover:bg-indigo-500/10 transition-all">
+                <span>⚡</span> Generative AI & RAG
+              </span>
+              <span
+                class="magnetic-btn btn-interaction flex items-center gap-2 px-4 py-2 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl shadow-sm text-xs sm:text-sm font-semibold text-slate-300 hover:border-emerald-400/50 hover:text-emerald-300 hover:bg-emerald-500/10 transition-all">
+                <span>📊</span> Big Data & Analytics
+              </span>
+              <span
+                class="magnetic-btn btn-interaction flex items-center gap-2 px-4 py-2 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl shadow-sm text-xs sm:text-sm font-semibold text-slate-300 hover:border-sky-400/50 hover:text-sky-300 hover:bg-sky-500/10 transition-all">
+                <span>☁️</span> Cloud Architecture
+              </span>
+            </div>
+
+            <!-- Stats Highlight Cards -->
+            <div class="hero-anim grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div class="spotlight-card rounded-2xl p-6 text-center">
+                <div
+                  class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400 mb-1 counter-num"
+                  data-target="50" data-suffix="+">0</div>
+                <div class="text-xs sm:text-sm font-medium text-slate-400">Projects Delivered</div>
+              </div>
+              <div class="spotlight-card rounded-2xl p-6 text-center">
+                <div
+                  class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 mb-1 counter-num"
+                  data-target="500" data-suffix="+">0</div>
+                <div class="text-xs sm:text-sm font-medium text-slate-400">Students Mentored</div>
+              </div>
+              <div class="spotlight-card rounded-2xl p-6 text-center">
+                <div
+                  class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-1 counter-num"
+                  data-target="5" data-suffix="+">0</div>
+                <div class="text-xs sm:text-sm font-medium text-slate-400">Years Experience</div>
+              </div>
+            </div>
+
+            <!-- Contact Quick links -->
+            <div
+              class="hero-anim flex flex-wrap gap-3 justify-center lg:justify-start pt-6 border-t border-white/[0.08]">
+              <a href="mailto:zuhaibbutt3@gmail.com"
+                class="magnetic-btn btn-interaction flex items-center gap-2 px-4 py-2.5 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl text-xs sm:text-sm font-semibold text-slate-300 hover:bg-sky-500/10 hover:border-sky-400/40 hover:text-sky-300 transition-all shadow-sm">
+                <span>📧</span> zuhaibbutt3@gmail.com
+              </a>
+              <a href="tel:+923167609216"
+                class="magnetic-btn btn-interaction flex items-center gap-2 px-4 py-2.5 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl text-xs sm:text-sm font-semibold text-slate-300 hover:bg-emerald-500/10 hover:border-emerald-400/40 hover:text-emerald-300 transition-all shadow-sm">
+                <span>📞</span> +92 316 7609216
+              </a>
+              <a href="https://wa.me/923167609216" target="_blank" rel="noreferrer"
+                class="magnetic-btn btn-interaction flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-lg shadow-emerald-950/50 transition-all">
+                <span>💬</span> Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Profile Image with 3D Parallax & Sine Floating -->
+          <div class="hero-anim flex justify-center lg:justify-end relative mt-6 lg:mt-0">
+            <div id="profile-container" class="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 cursor-pointer">
+              <!-- Glow Rings -->
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-sky-500/25 via-indigo-500/20 to-emerald-500/15 rounded-full blur-3xl animate-pulse">
+              </div>
+              <div
+                class="absolute -inset-2 bg-gradient-to-r from-sky-500/40 to-indigo-500/40 rounded-full opacity-40 blur-md">
+              </div>
+
+              <!-- Avatar Frame -->
+              <div id="profile-image-inner"
+                class="relative w-full h-full rounded-full border-[5px] border-slate-800/80 shadow-2xl overflow-hidden backdrop-blur-md transition-transform duration-200">
+                <img src="https://zuhaibbutt.vercel.app/profile.png" alt="Zuhaib Hussain Butt"
+                  class="w-full h-full object-cover select-none">
+              </div>
+
+              <!-- Floating Experience Badge -->
+              <div
+                class="absolute -bottom-3 -right-2 bg-slate-900/90 backdrop-blur-md border border-white/[0.1] py-2 px-3.5 rounded-2xl shadow-xl flex items-center gap-2.5">
+                <div
+                  class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shadow-sm">
+                  ★
+                </div>
+                <div>
+                  <div class="text-[11px] font-bold text-slate-200">Top Rated</div>
+                  <div class="text-[10px] text-slate-400 font-medium">AI Specialist</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- 3. FREELANCE SERVICES SECTION   -->
+    <!-- =============================== -->
+    <section id="services" class="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+      <div class="section-heading flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="bg-sky-500/10 border border-sky-500/25 p-2.5 rounded-2xl shadow-sm text-sky-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xs uppercase font-bold tracking-widest text-sky-400">What I Offer</span>
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+              Freelance Services
+            </h2>
+          </div>
+        </div>
+        <p class="text-slate-400 text-sm max-w-md">End-to-end bespoke machine learning solutions engineered for high
+          performance and enterprise production.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Service Card 1 -->
+        <div class="spotlight-card rounded-2xl p-7 flex flex-col justify-between group">
+          <div>
+            <div
+              class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/25 flex items-center justify-center text-sky-400 mb-5 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z">
+                </path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition-colors">End‑to‑End Machine
+              Learning</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">Complete ML pipelines: EDA, feature engineering,
+              predictive modeling, rigorous validation, optimization, and scalable production deployment.</p>
+          </div>
+          <div
+            class="pt-4 border-t border-white/[0.06] flex items-center text-xs font-semibold text-sky-400 gap-1 group-hover:gap-2 transition-all">
+            <span>Explore ML Capabilities</span> →
+          </div>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="spotlight-card rounded-2xl p-7 flex flex-col justify-between group">
+          <div>
+            <div
+              class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/25 flex items-center justify-center text-indigo-400 mb-5 group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(129,140,248,0.15)]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">Computer Vision
+              & Video Analytics</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">YOLO / Detectron object detection, OpenCV pipelines,
+              facial recognition, real‑time video inference, and workplace safety tracking.</p>
+          </div>
+          <div
+            class="pt-4 border-t border-white/[0.06] flex items-center text-xs font-semibold text-indigo-400 gap-1 group-hover:gap-2 transition-all">
+            <span>Vision Architecture</span> →
+          </div>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="spotlight-card rounded-2xl p-7 flex flex-col justify-between group">
+          <div>
+            <div
+              class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(52,211,153,0.15)]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">LLMs, RAG & NLP
+              Systems</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">Retrieval‑augmented generation (RAG) with vector
+              databases, contextual AI chatbots, automated summarization, and semantic search engines.</p>
+          </div>
+          <div
+            class="pt-4 border-t border-white/[0.06] flex items-center text-xs font-semibold text-emerald-400 gap-1 group-hover:gap-2 transition-all">
+            <span>Generative AI Solutions</span> →
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- 4. PROFESSIONAL EXPERIENCE      -->
+    <!-- =============================== -->
+    <section id="experience-section" class="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+      <div class="section-heading flex items-end justify-between mb-12 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="bg-sky-500/10 border border-sky-500/25 p-2.5 rounded-2xl shadow-sm text-sky-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xs uppercase font-bold tracking-widest text-sky-400">Career Journey</span>
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+              Professional Experience
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Experience Card 1 -->
+        <div class="spotlight-card rounded-2xl overflow-hidden h-full">
+          <div class="p-8 pl-12 relative h-full">
+            <!-- Timeline elements -->
+            <div class="timeline-track">
+              <div class="timeline-progress-bar"></div>
+            </div>
+            <div class="timeline-dot-wrapper">
+              <div class="timeline-dot-pulse"></div>
+            </div>
+
+            <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+              <span
+                class="px-3 py-1 bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-bold rounded-full">Academia
+                & Research</span>
+              <span
+                class="text-xs font-semibold text-slate-400 bg-white/[0.05] border border-white/[0.06] px-2.5 py-1 rounded-md">Mar
+                2024 – Present</span>
+            </div>
+
+            <h3 class="text-xl font-bold text-white leading-tight">
+              Lecturer in Data Science
+              <span class="text-sky-400 block text-base font-semibold mt-0.5">GIFT University</span>
+            </h3>
+
+            <div class="flex items-center gap-2 text-slate-400 text-xs mt-2 mb-4 font-medium">
+              <span>📍 Gujranwala, Pakistan</span>
+              <span>•</span>
+              <span>Full-time</span>
+            </div>
+
+            <ul class="text-sm text-slate-300 space-y-2.5 leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <span class="text-sky-400 font-bold mt-0.5">▸</span>
+                <span>Lead curriculum design and delivery of advanced Data Science, Machine Learning, and Generative AI
+                  courses.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-sky-400 font-bold mt-0.5">▸</span>
+                <span>Supervise 12+ Final‑Year Capstone Projects and directly mentor 500+ undergraduate students in
+                  practical AI research.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience Card 2 -->
+        <div class="spotlight-card rounded-2xl overflow-hidden h-full">
+          <div class="p-8 pl-12 relative h-full">
+            <!-- Timeline elements -->
+            <div class="timeline-track">
+              <div class="timeline-progress-bar"></div>
+            </div>
+            <div class="timeline-dot-wrapper">
+              <div class="timeline-dot-pulse"></div>
+            </div>
+
+            <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+              <span
+                class="px-3 py-1 bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-bold rounded-full">Global
+                Freelancing</span>
+              <span
+                class="text-xs font-semibold text-slate-400 bg-white/[0.05] border border-white/[0.06] px-2.5 py-1 rounded-md">2020
+                – Present</span>
+            </div>
+
+            <h3 class="text-xl font-bold text-white leading-tight">
+              Freelance Data Scientist
+              <span class="text-indigo-400 block text-base font-semibold mt-0.5">Fiverr & Upwork</span>
+            </h3>
+
+            <div class="flex items-center gap-2 text-slate-400 text-xs mt-2 mb-4 font-medium">
+              <span>🌍 Worldwide Remote</span>
+              <span>•</span>
+              <span>Independent Consultant</span>
+            </div>
+
+            <ul class="text-sm text-slate-300 space-y-2.5 leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <span class="text-indigo-400 font-bold mt-0.5">▸</span>
+                <span>Delivered 50+ international commercial projects covering predictive ML, Computer Vision, NLP, and
+                  interactive BI dashboards.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-indigo-400 font-bold mt-0.5">▸</span>
+                <span>Architected real‑time defect detection, automated recommenders, and high-precision RAG pipelines
+                  for healthcare and retail sectors.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- 5. CORE SKILLS SECTION          -->
+    <!-- =============================== -->
+    <section id="skills" class="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+      <div class="section-heading mb-10">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="bg-sky-500/10 border border-sky-500/25 p-2.5 rounded-2xl shadow-sm text-sky-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path d="M15 2v2"></path>
+              <path d="M15 20v2"></path>
+              <path d="M2 15h2"></path>
+              <path d="M2 9h2"></path>
+              <path d="M20 15h2"></path>
+              <path d="M20 9h2"></path>
+            </svg>
+          </div>
+          <h2
+            class="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+            Core Technical Skills
+          </h2>
+        </div>
+        <p class="text-slate-400 text-sm font-medium ml-1">Comprehensive toolkit, proven frameworks, and technical
+          leadership</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Technical Stacks -->
+        <div class="lg:col-span-2 spotlight-card rounded-2xl p-7">
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <span>⚙️</span> Technical Stacks & Tools
+          </h3>
+          <div class="space-y-6">
+            <div>
+              <div class="text-sky-400 text-xs font-bold uppercase tracking-wider mb-2.5">Programming & Modeling</div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-sky-950/40 border border-sky-500/25 text-sky-300 text-xs font-semibold rounded-xl hover:border-sky-400/50 hover:text-white">Python</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-sky-950/40 border border-sky-500/25 text-sky-300 text-xs font-semibold rounded-xl hover:border-sky-400/50 hover:text-white">SQL</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-sky-950/40 border border-sky-500/25 text-sky-300 text-xs font-semibold rounded-xl hover:border-sky-400/50 hover:text-white">PyTorch</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-sky-950/40 border border-sky-500/25 text-sky-300 text-xs font-semibold rounded-xl hover:border-sky-400/50 hover:text-white">Scikit-Learn</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-sky-950/40 border border-sky-500/25 text-sky-300 text-xs font-semibold rounded-xl hover:border-sky-400/50 hover:text-white">TensorFlow</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-indigo-400 text-xs font-bold uppercase tracking-wider mb-2.5">AI, LLMs & Vision</div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-indigo-950/40 border border-indigo-500/25 text-indigo-300 text-xs font-semibold rounded-xl hover:border-indigo-400/50 hover:text-white">OpenAI
+                  API</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-indigo-950/40 border border-indigo-500/25 text-indigo-300 text-xs font-semibold rounded-xl hover:border-indigo-400/50 hover:text-white">LangChain
+                  / LlamaIndex</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-indigo-950/40 border border-indigo-500/25 text-indigo-300 text-xs font-semibold rounded-xl hover:border-indigo-400/50 hover:text-white">RAG
+                  Architecture</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-indigo-950/40 border border-indigo-500/25 text-indigo-300 text-xs font-semibold rounded-xl hover:border-indigo-400/50 hover:text-white">YOLO
+                  / OpenCV</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2.5">Data Engineering &
+                Analytics</div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-emerald-950/40 border border-emerald-500/25 text-emerald-300 text-xs font-semibold rounded-xl hover:border-emerald-400/50 hover:text-white">Power
+                  BI</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-emerald-950/40 border border-emerald-500/25 text-emerald-300 text-xs font-semibold rounded-xl hover:border-emerald-400/50 hover:text-white">Tableau</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-emerald-950/40 border border-emerald-500/25 text-emerald-300 text-xs font-semibold rounded-xl hover:border-emerald-400/50 hover:text-white">Apache
+                  Spark</span>
+                <span
+                  class="magnetic-btn btn-interaction px-3.5 py-1.5 bg-emerald-950/40 border border-emerald-500/25 text-emerald-300 text-xs font-semibold rounded-xl hover:border-emerald-400/50 hover:text-white">Hadoop</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Proficiency Bars with Scroll Triggered Animation -->
+        <div class="spotlight-card rounded-2xl p-7">
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <span>📊</span> Proficiency
+          </h3>
+          <div id="bars" class="space-y-4"></div>
+        </div>
+
+        <!-- Soft Skills & Leadership -->
+        <div class="spotlight-card rounded-2xl p-7">
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <span>🤝</span> Leadership
+          </h3>
+          <ul class="space-y-3.5 text-sm text-slate-300 font-medium">
+            <li class="flex items-center gap-2.5 p-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <span class="text-sky-400">✓</span> Curriculum Design
+            </li>
+            <li class="flex items-center gap-2.5 p-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <span class="text-sky-400">✓</span> Project Management
+            </li>
+            <li class="flex items-center gap-2.5 p-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <span class="text-sky-400">✓</span> Technical Mentorship
+            </li>
+            <li class="flex items-center gap-2.5 p-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <span class="text-sky-400">✓</span> Executive Presentations
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- 6. CLIENT TESTIMONIALS          -->
+    <!-- =============================== -->
+    <section id="testimonials" class="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+      <div class="section-heading flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="bg-sky-500/10 border border-sky-500/25 p-2.5 rounded-2xl shadow-sm text-sky-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xs uppercase font-bold tracking-widest text-sky-400">Trusted Feedback</span>
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+              Client Testimonials
+            </h2>
+          </div>
+        </div>
+        <p class="text-slate-400 text-sm">Real reviews from satisfied global clients.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div class="spotlight-card rounded-2xl overflow-hidden p-6 flex flex-col justify-between">
+          <div>
+            <div class="pb-4 border-b border-white/[0.06] flex justify-between items-center mb-4">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-600 to-blue-700 flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                  EC
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white">Eric Couu</div>
+                  <div class="text-xs text-slate-400 font-medium">🇺🇸 United States</div>
+                </div>
+              </div>
+              <div class="flex gap-1 text-amber-400 text-sm">★★★★★</div>
+            </div>
+            <h4 class="text-sky-400 font-semibold text-sm mb-2">Data Analytics Consultation</h4>
+            <p class="text-slate-300 text-sm italic leading-relaxed">
+              "Good coder. Delivered accurate analysis on time and communicated very clearly throughout the project."
+            </p>
+          </div>
+          <div
+            class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
+            <span>Verified 5-Star Freelance Review</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="spotlight-card rounded-2xl overflow-hidden p-6 flex flex-col justify-between">
+          <div>
+            <div class="pb-4 border-b border-white/[0.06] flex justify-between items-center mb-4">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                  AV
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white">Ale Verna</div>
+                  <div class="text-xs text-slate-400 font-medium">🇮🇹 Italy</div>
+                </div>
+              </div>
+              <div class="flex gap-1 text-amber-400 text-sm">★★★★★</div>
+            </div>
+            <h4 class="text-indigo-400 font-semibold text-sm mb-2">Data Labeling & Computer Vision</h4>
+            <p class="text-slate-300 text-sm italic leading-relaxed">
+              "He was extremely professional and he also made a Google Meet to clarify all technical specifications.
+              Highly recommended for ML work!"
+            </p>
+          </div>
+          <div
+            class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
+            <span>Verified 5-Star Freelance Review</span>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 (Highlight) -->
+        <div
+          class="spotlight-card rounded-2xl overflow-hidden p-6 flex flex-col justify-between bg-gradient-to-br from-[#0c1222]/90 to-[#121c36]/70">
+          <div>
+            <div class="pb-4 border-b border-white/[0.06] flex justify-between items-center mb-4">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                  100%
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white">Job Success</div>
+                  <div class="text-xs text-slate-400 font-medium">Fiverr & Upwork</div>
+                </div>
+              </div>
+              <div class="flex gap-1 text-amber-400 text-sm">★★★★★</div>
+            </div>
+            <h4 class="text-emerald-400 font-semibold text-sm mb-2">Customer Satisfaction</h4>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Consistently maintaining 5-star ratings across enterprise client deliverables with high precision AI
+              models and clear documentation.
+            </p>
+          </div>
+          <div
+            class="mt-4 pt-3 border-t border-white/[0.06] text-[11px] font-semibold text-sky-400 flex items-center gap-1">
+            <span>Global Client Base</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- 7. SELECTED PROJECTS (SHOWCASE) -->
+    <!-- =============================== -->
+    <section id="projects" class="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+      <div class="section-heading flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="bg-sky-500/10 border border-sky-500/25 p-2.5 rounded-2xl shadow-sm text-sky-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path
+                d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z">
+              </path>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xs uppercase font-bold tracking-widest text-sky-400">Featured Portfolio</span>
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+              Selected Projects
+            </h2>
+          </div>
+        </div>
+        <p class="text-slate-400 text-sm">Highlights of high-impact AI/ML and analytics deployments.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Project 1 -->
+        <div class="spotlight-card project-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class="px-3 py-1 bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-bold rounded-full">ML
+                + RAG System</span>
+              <span class="text-xs font-semibold text-slate-400">Confidential Client</span>
+            </div>
+            <h3 class="font-bold text-white text-xl leading-tight mb-3 group-hover:text-sky-400 transition-colors">
+              FHIR Medical Claim Rejection Prediction
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+              Engineered a high-precision predictive system leveraging ensemble ML models and RAG knowledge retrieval to
+              identify and mitigate medical billing rejections automatically.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">Python</span>
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">RAG
+                / LangChain</span>
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">FHIR
+                Standards</span>
+            </div>
+          </div>
+          <div
+            class="px-7 py-4 bg-white/[0.02] border-t border-white/[0.06] flex justify-between items-center text-xs font-semibold text-sky-400 group-hover:bg-[#121c36] transition-colors">
+            <span>Healthcare Analytics</span>
+            <span class="group-hover:translate-x-1 transition-transform">View Architecture →</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="spotlight-card project-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class="px-3 py-1 bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-bold rounded-full">Business
+                Intelligence</span>
+              <span class="text-xs font-semibold text-slate-400">Automotive Group</span>
+            </div>
+            <h3 class="font-bold text-white text-xl leading-tight mb-3 group-hover:text-indigo-400 transition-colors">
+              Car Showroom Sales & Revenue Dashboard
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+              Designed an interactive Power BI executive dashboard analyzing multi-branch car sales trends, profit
+              margins, inventory turnover, and sales rep commission structures.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">Power
+                BI</span>
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">DAX</span>
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">Data
+                Modeling</span>
+            </div>
+          </div>
+          <div
+            class="px-7 py-4 bg-white/[0.02] border-t border-white/[0.06] flex justify-between items-center text-xs font-semibold text-indigo-400 group-hover:bg-[#121c36] transition-colors">
+            <span>Executive BI</span>
+            <span class="group-hover:translate-x-1 transition-transform">Interactive Report →</span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="spotlight-card project-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class="px-3 py-1 bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold rounded-full">Computer
+                Vision</span>
+              <span class="text-xs font-semibold text-slate-400">Industry AI</span>
+            </div>
+            <h3 class="font-bold text-white text-xl leading-tight mb-3 group-hover:text-emerald-400 transition-colors">
+              Real-Time Safety & Object Detection System
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+              Deployed real-time surveillance inferencing powered by custom YOLO architectures to monitor PPE compliance
+              and equipment danger zones with millisecond latency.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">YOLOv8</span>
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">OpenCV</span>
+              <span
+                class="text-[11px] font-semibold px-2.5 py-1 bg-white/[0.05] border border-white/[0.08] text-slate-300 rounded-lg">FastAPI</span>
+            </div>
+          </div>
+          <div
+            class="px-7 py-4 bg-white/[0.02] border-t border-white/[0.06] flex justify-between items-center text-xs font-semibold text-emerald-400 group-hover:bg-[#121c36] transition-colors">
+            <span>Vision Inference</span>
+            <span class="group-hover:translate-x-1 transition-transform">Case Study →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- 8. EDUCATION & CERTIFICATIONS   -->
+    <!-- =============================== -->
+    <section class="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+
+      <!-- Education Block -->
+      <div class="mb-16">
+        <div class="section-heading flex items-center gap-3 mb-10">
+          <div class="bg-sky-500/10 border border-sky-500/25 p-2.5 rounded-2xl shadow-sm text-sky-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xs uppercase font-bold tracking-widest text-sky-400">Academic Background</span>
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+              Education
+            </h2>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="spotlight-card rounded-2xl p-7">
+            <div class="flex justify-between items-start gap-4 mb-2">
+              <h3 class="text-xl font-bold text-white leading-tight">MS in Computer Science</h3>
+              <span
+                class="text-xs font-bold text-sky-300 bg-sky-500/15 border border-sky-500/30 px-3 py-1 rounded-full whitespace-nowrap">2022
+                – 2024</span>
+            </div>
+            <div class="text-sky-400 text-sm font-semibold mb-4">
+              University of Engineering & Technology (UET), Lahore
+            </div>
+            <p class="text-sm text-slate-300 bg-white/[0.03] p-4 rounded-xl border border-white/[0.06] leading-relaxed">
+              Specialized in Advanced Machine Learning & Deep Learning, Generative AI, IoT Architecture, Cloud
+              Computing, and Computer Vision.
+            </p>
+          </div>
+
+          <div class="spotlight-card rounded-2xl p-7">
+            <div class="flex justify-between items-start gap-4 mb-2">
+              <h3 class="text-xl font-bold text-white leading-tight">BS in Computer Software Engineering</h3>
+              <span
+                class="text-xs font-bold text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-3 py-1 rounded-full whitespace-nowrap">2017
+                – 2021</span>
+            </div>
+            <div class="text-indigo-400 text-sm font-semibold mb-4">
+              GIFT University, Gujranwala
+            </div>
+            <p class="text-sm text-slate-300 bg-white/[0.03] p-4 rounded-xl border border-white/[0.06] leading-relaxed">
+              Served as Vice President of YCPS student body; specialized in Artificial Intelligence, Software Design,
+              and IoT Systems.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications Block -->
+      <div>
+        <div class="section-heading flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
+          <div class="flex items-center gap-3">
+            <div class="bg-indigo-500/10 border border-indigo-500/25 p-2.5 rounded-2xl shadow-sm text-indigo-400">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                <circle cx="12" cy="8" r="6"></circle>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+              </svg>
+            </div>
+            <div>
+              <span class="text-xs uppercase font-bold tracking-widest text-indigo-400">Verified Credentials</span>
+              <h2
+                class="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-400 animate-gradient-shift">
+                Certifications
+              </h2>
+            </div>
+          </div>
+          <span
+            class="text-slate-400 text-sm font-medium bg-white/[0.04] px-4 py-2 rounded-full border border-white/[0.08] shadow-sm">
+            Professional credentials & achievements
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Cert 1 -->
+          <div class="spotlight-card rounded-2xl p-6 flex flex-col justify-between">
+            <div class="flex items-start gap-3.5 mb-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/25 flex items-center justify-center text-indigo-400 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6"></circle>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-white leading-tight">Generative AI for Educators</h3>
+                <span class="text-xs text-slate-400 font-medium">United Latino Students Ass...</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-center text-xs border-t border-white/[0.06] pt-3 mt-2">
+              <span class="text-slate-400 font-medium">Issuing Org</span>
+              <span
+                class="text-indigo-300 font-bold bg-indigo-500/15 border border-indigo-500/25 px-2.5 py-1 rounded-md">2024</span>
+            </div>
+          </div>
+
+          <!-- Cert 2 -->
+          <div class="spotlight-card rounded-2xl p-6 flex flex-col justify-between">
+            <div class="flex items-start gap-3.5 mb-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/25 flex items-center justify-center text-sky-400 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6"></circle>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-white leading-tight">Cloudera Certified Admin for Hadoop</h3>
+                <span class="text-xs text-slate-400 font-medium">Cloudera</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-center text-xs border-t border-white/[0.06] pt-3 mt-2">
+              <span class="text-slate-400 font-medium">Big Data Admin</span>
+              <span
+                class="text-sky-300 font-bold bg-sky-500/15 border border-sky-500/25 px-2.5 py-1 rounded-md">2023</span>
+            </div>
+          </div>
+
+          <!-- Cert 3 -->
+          <div class="spotlight-card rounded-2xl p-6 flex flex-col justify-between">
+            <div class="flex items-start gap-3.5 mb-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6"></circle>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-white leading-tight">Data Science with Python</h3>
+                <span class="text-xs text-slate-400 font-medium">Udemy</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-center text-xs border-t border-white/[0.06] pt-3 mt-2">
+              <span class="text-slate-400 font-medium">Python Specialization</span>
+              <span
+                class="text-emerald-300 font-bold bg-emerald-500/15 border border-emerald-500/25 px-2.5 py-1 rounded-md">2021</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- 9. CALL TO ACTION SECTION       -->
+    <!-- =============================== -->
+    <section id="contact" class="max-w-7xl mx-auto px-4 py-16 lg:py-24">
+      <div
+        class="relative spotlight-card rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden border border-white/[0.1] shadow-2xl bg-gradient-to-br from-[#0c1222]/90 via-[#0e162c]/85 to-[#121c38]/90">
+        <!-- Subtle Glow Layer -->
+        <div
+          class="absolute -right-16 -bottom-16 w-80 h-80 bg-gradient-to-br from-sky-500/20 to-indigo-500/20 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div
+          class="absolute -left-16 -top-16 w-80 h-80 bg-gradient-to-br from-indigo-500/15 to-emerald-500/15 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Left Text Area -->
+          <div class="lg:col-span-7 text-left">
+            <span
+              class="inline-block px-3.5 py-1.5 bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-bold rounded-full mb-3">
+              Let's Collaborate
+            </span>
+            <h3 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+              Let's build something <br class="hidden sm:inline">
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400 animate-gradient-shift">
+                intelligent & data‑driven
+              </span>
+            </h3>
+            <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
+              Available for freelance engagements, corporate AI training, and technical consulting. Based in Pakistan,
+              collaborating with partners and businesses globally.
+            </p>
+          </div>
+
+          <!-- Right Action Buttons -->
+          <div
+            class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-4 justify-start lg:justify-end">
+            <!-- Email CTA -->
+            <a href="mailto:zuhaibbutt3@gmail.com"
+              class="magnetic-btn btn-interaction inline-flex items-center justify-center h-12 px-7 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold text-sm shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              Contact Me Directly
+            </a>
+
+            <!-- WhatsApp CTA -->
+            <a href="https://wa.me/923167609216" target="_blank" rel="noreferrer"
+              class="magnetic-btn btn-interaction inline-flex items-center justify-center h-12 px-7 rounded-2xl bg-white/[0.06] hover:bg-white/[0.1] text-slate-200 hover:text-white font-semibold text-sm border border-white/[0.1] shadow-sm hover:border-emerald-400/50 hover:text-emerald-300 transition-all">
+              <span class="mr-2 text-base">🟢</span>
+              WhatsApp Chat
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =============================== -->
+  <!-- 10. FOOTER SECTION              -->
+  <!-- =============================== -->
+  <footer class="bg-[#080c18]/90 backdrop-blur-xl border-t border-white/[0.08] py-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <!-- Footer Logo/Name -->
+      <div class="flex items-center gap-3">
+        <div class="bg-sky-500/10 border border-sky-500/25 rounded-xl p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+            </path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="font-extrabold text-white text-lg">Zuhaib Hussain Butt</span>
+          <p class="text-[11px] text-slate-400">Senior Data Scientist & AI/ML Engineer</p>
+        </div>
+      </div>
+
+      <!-- Copyright Text -->
+      <div class="text-slate-400 text-xs text-center md:text-left">
+        © 2026 Zuhaib Hussain Butt. Engineered with GSAP & modern animations.
+      </div>
+
+      <!-- Footer Socials -->
+      <div class="flex gap-3">
+        <a href="https://www.linkedin.com/in/zuhaib-hussain-butt-6628141a4" target="_blank" rel="noreferrer"
+          class="magnetic-btn btn-interaction p-2.5 rounded-full bg-white/[0.05] hover:bg-sky-500/15 text-slate-300 hover:text-sky-400 border border-white/[0.08] hover:border-sky-400/40 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg>
+        </a>
+        <a href="mailto:zuhaibbutt3@gmail.com"
+          class="magnetic-btn btn-interaction p-2.5 rounded-full bg-white/[0.05] hover:bg-red-500/15 text-slate-300 hover:text-red-400 border border-white/[0.08] hover:border-red-400/40 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </a>
+        <a href="https://wa.me/923167609216" target="_blank" rel="noreferrer"
+          class="magnetic-btn btn-interaction p-2.5 rounded-full bg-white/[0.05] hover:bg-emerald-500/15 text-slate-300 hover:text-emerald-400 border border-white/[0.08] hover:border-emerald-400/40 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.327.101.144.447.712.964 1.175.667.598 1.226.783 1.371.854.145.072.231.058.318-.043.087-.101.376-.433.477-.58.101-.144.202-.12.332-.072.13.048.823.388.964.459.141.072.235.108.27.172.035.064.035.352-.109.757z" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =============================== -->
+  <!-- 11. FLOATING BACK TO TOP BUTTON -->
+  <!-- =============================== -->
+  <button id="back-to-top" aria-label="Back to Top"
+    class="fixed bottom-6 right-6 w-12 h-12 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/[0.1] shadow-2xl flex items-center justify-center text-slate-300 hover:text-sky-400 transition-all duration-300 opacity-0 pointer-events-none z-50 group hover:scale-110 hover:border-sky-500/40">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+      class="group-hover:-translate-y-0.5 transition-transform">
+      <path d="m18 15-6-6-6 6"></path>
+    </svg>
+  </button>
+
+
+  <!-- ============================================== -->
+  <!-- 12. JAVASCRIPT: PRO ANIMATIONS & INTERACTIONS  -->
+  <!-- ============================================== -->
+  <script>
+    // -------------------------------------------------------------
+    // 1. REGISTER GSAP PLUGINS
+    // -------------------------------------------------------------
+    gsap.registerPlugin(ScrollTrigger);
+
+    // -------------------------------------------------------------
+    // 2. LENIS SMOOTH SCROLLING
+    // -------------------------------------------------------------
+    let lenis;
+    try {
+      lenis = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 1.8
+      });
+
+      // Synchronize Lenis with GSAP ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } catch (e) {
+      console.warn('Lenis could not be initialized:', e);
+    }
+
+    // -------------------------------------------------------------
+    // 3. TOP SCROLL PROGRESS BAR & BACK TO TOP BUTTON
+    // -------------------------------------------------------------
+    const scrollProgress = document.getElementById('scroll-progress');
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+
+      if (scrollProgress) {
+        scrollProgress.style.width = scrolled + '%';
+      }
+
+      if (backToTopBtn) {
+        if (winScroll > 320) {
+          backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+          backToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+        } else {
+          backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+          backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+        }
+      }
+    });
+
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        if (lenis) {
+          lenis.scrollTo(0, { duration: 1.2 });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // 4. NAVBAR SCROLL BACKGROUND TRANSITION
+    // -------------------------------------------------------------
+    ScrollTrigger.create({
+      start: "top -50",
+      end: 99999,
+      onEnter: () => {
+        document.querySelector('.navbar-container')?.classList.add('navbar-scrolled');
+      },
+      onLeaveBack: () => {
+        document.querySelector('.navbar-container')?.classList.remove('navbar-scrolled');
+      }
+    });
+
+    // -------------------------------------------------------------
+    // 5. PRO CUSTOM CURSOR (DESKTOP)
+    // -------------------------------------------------------------
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorRing = document.getElementById('cursor-ring');
+
+    if (window.matchMedia('(pointer: fine)').matches && cursorDot && cursorRing) {
+      const setDotX = gsap.quickTo(cursorDot, "x", { duration: 0.12, ease: "power3" });
+      const setDotY = gsap.quickTo(cursorDot, "y", { duration: 0.12, ease: "power3" });
+      const setRingX = gsap.quickTo(cursorRing, "x", { duration: 0.35, ease: "power2.out" });
+      const setRingY = gsap.quickTo(cursorRing, "y", { duration: 0.35, ease: "power2.out" });
+
+      window.addEventListener('mousemove', (e) => {
+        setDotX(e.clientX);
+        setDotY(e.clientY);
+        setRingX(e.clientX);
+        setRingY(e.clientY);
+      });
+
+      // Hover expansion on clickable / interactive elements
+      const interactives = document.querySelectorAll('a, button, .spotlight-card, input, [data-cursor-hover]');
+      interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          document.body.classList.add('cursor-active');
+        });
+        el.addEventListener('mouseleave', () => {
+          document.body.classList.remove('cursor-active');
+        });
+      });
+    }
+
+    // -------------------------------------------------------------
+    // 6. MAGNETIC BUTTON EFFECT
+    // -------------------------------------------------------------
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document.querySelectorAll('.magnetic-btn').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(btn, {
+            x: x * 0.28,
+            y: y * 0.28,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        btn.addEventListener('mouseleave', () => {
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.6,
+            ease: "elastic.out(1, 0.35)"
+          });
+        });
+      });
+    }
+
+    // -------------------------------------------------------------
+    // 7. 3D PERSPECTIVE TILT & SPOTLIGHT FOR CARDS
+    // -------------------------------------------------------------
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+
+        // Calculate 3D tilt
+        if (window.matchMedia('(pointer: fine)').matches) {
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -5;
+          const rotateY = ((x - centerX) / centerX) * 5;
+          gsap.to(card, {
+            rotateX: rotateX,
+            rotateY: rotateY,
+            transformPerspective: 900,
+            duration: 0.25,
+            ease: "power2.out"
+          });
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: "power3.out"
+        });
+      });
+    });
+
+    // -------------------------------------------------------------
+    // 8. HERO PROFILE 3D PARALLAX & CONTINUOUS SINE FLOAT
+    // -------------------------------------------------------------
+    const profileContainer = document.getElementById('profile-container');
+    const profileImageInner = document.getElementById('profile-image-inner');
+
+    if (profileContainer) {
+      // Gentle breathing float animation
+      gsap.to(profileContainer, {
+        y: -12,
+        duration: 3.2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+
+      // Mouse interactive tilt
+      if (window.matchMedia('(pointer: fine)').matches && profileImageInner) {
+        window.addEventListener('mousemove', (e) => {
+          const { innerWidth, innerHeight } = window;
+          const xNorm = (e.clientX / innerWidth - 0.5) * 2;
+          const yNorm = (e.clientY / innerHeight - 0.5) * 2;
+
+          gsap.to(profileImageInner, {
+            rotateY: xNorm * 12,
+            rotateX: -yNorm * 12,
+            transformPerspective: 800,
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        });
+      }
+
+      // Scroll scrub parallax
+      ScrollTrigger.create({
+        trigger: "#hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.5,
+        onUpdate: (self) => {
+          gsap.to(profileContainer, {
+            y: self.progress * 45,
+            overwrite: "auto",
+            duration: 0.1
+          });
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // 9. HERO STAGGERED ENTRANCE TIMELINE
+    // -------------------------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+      heroTl
+        .from("#main-header", { y: -70, opacity: 0, filter: "blur(6px)", duration: 1 })
+        .from(".hero-anim", {
+          y: 40,
+          opacity: 0,
+          filter: "blur(8px)",
+          scale: 0.98,
+          stagger: 0.14,
+          duration: 1.1
+        }, "-=0.5")
+        .from("#profile-container", {
+          scale: 0.88,
+          opacity: 0,
+          filter: "blur(10px)",
+          duration: 1.2,
+          ease: "power3.out"
+        }, "-=0.8");
+    });
+
+    // -------------------------------------------------------------
+    // 10. ANIMATED NUMBER COUNTERS (GSAP SCROLLTRIGGER)
+    // -------------------------------------------------------------
+    document.querySelectorAll('.counter-num').forEach(counter => {
+      const targetVal = parseInt(counter.getAttribute('data-target'), 10);
+      const suffix = counter.getAttribute('data-suffix') || '';
+
+      const counterObj = { val: 0 };
+
+      gsap.to(counterObj, {
+        val: targetVal,
+        duration: 1.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: counter,
+          start: "top 90%",
+          once: true
+        },
+        onUpdate: () => {
+          counter.innerText = Math.round(counterObj.val) + suffix;
+        }
+      });
+    });
+
+    // -------------------------------------------------------------
+    // 11. SECTION HEADINGS & CARDS SCROLL REVEALS
+    // -------------------------------------------------------------
+    document.querySelectorAll('.section-heading').forEach(heading => {
+      gsap.from(heading, {
+        y: 35,
+        opacity: 0,
+        filter: "blur(6px)",
+        scale: 0.98,
+        duration: 0.95,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: heading,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    // Animate project cards with special showcase motion
+    document.querySelectorAll('#projects .project-card').forEach((card, i) => {
+      gsap.from(card, {
+        y: 55,
+        opacity: 0,
+        filter: "blur(8px)",
+        scale: 0.95,
+        duration: 1,
+        delay: i * 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    // Animate other spotlight cards on scroll
+    document.querySelectorAll('section:not(#projects)').forEach(section => {
+      const cards = section.querySelectorAll('.spotlight-card');
+      if (cards.length > 0) {
+        gsap.from(cards, {
+          y: 40,
+          opacity: 0,
+          filter: "blur(5px)",
+          scale: 0.98,
+          duration: 0.85,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+      }
+    });
+
+    // -------------------------------------------------------------
+    // 12. EXPERIENCE TIMELINE PROGRESS SCRUBBING
+    // -------------------------------------------------------------
+    const timelineSection = document.getElementById('experience-section');
+    if (timelineSection) {
+      document.querySelectorAll('.timeline-progress-bar').forEach(bar => {
+        gsap.to(bar, {
+          height: "100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: timelineSection,
+            start: "top 70%",
+            end: "bottom 75%",
+            scrub: 0.6
+          }
+        });
+      });
+    }
+
+    // -------------------------------------------------------------
+    // 13. DYNAMIC SKILL PROGRESS BARS (ANIMATED ROLLOUT)
+    // -------------------------------------------------------------
+    const proficiencies = [
+      ["Python / PyTorch / Sklearn", 95],
+      ["Deep Learning & CV/NLP", 92],
+      ["LLMs & RAG Systems", 88],
+      ["Big Data (Spark / Hadoop)", 86],
+      ["Power BI & Tableau Dashboards", 90]
+    ];
+
+    const barsContainer = document.getElementById("bars");
+    if (barsContainer) {
+      proficiencies.forEach(([label, pct], index) => {
+        const row = document.createElement("div");
+        row.className = "skill-row";
+        row.innerHTML = `
+          <div class="flex justify-between text-xs font-semibold mb-1.5 text-slate-300">
+            <span>${label}</span>
+            <span class="skill-pct text-sky-400 font-bold" data-target="${pct}">0%</span>
+          </div>
+          <div class="h-2 rounded-full bg-slate-900 overflow-hidden border border-white/[0.06]">
+            <div class="skill-fill h-full rounded-full bg-gradient-to-r from-sky-400 via-indigo-400 to-emerald-400" style="width: 0%;"></div>
+          </div>
+        `;
+        barsContainer.appendChild(row);
+
+        // GSAP ScrollTrigger for the bar fill and percentage count
+        const fillBar = row.querySelector('.skill-fill');
+        const pctText = row.querySelector('.skill-pct');
+        const countObj = { val: 0 };
+
+        ScrollTrigger.create({
+          trigger: barsContainer,
+          start: "top 85%",
+          once: true,
+          onEnter: () => {
+            // Animate bar width
+            gsap.to(fillBar, {
+              width: `${pct}%`,
+              duration: 1.5,
+              delay: index * 0.1,
+              ease: "power3.out"
+            });
+
+            // Animate counter text
+            gsap.to(countObj, {
+              val: pct,
+              duration: 1.5,
+              delay: index * 0.1,
+              ease: "power2.out",
+              onUpdate: () => {
+                pctText.innerText = `${Math.round(countObj.val)}%`;
+              }
+            });
+          }
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>
