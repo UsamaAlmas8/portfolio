@@ -406,17 +406,17 @@
         <!-- Right: Action Buttons (Always Visible & Responsive) -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <!-- PDF Button -->
-          <button title="Download PDF"
-            class="flex items-center justify-center h-8 sm:h-9 px-2.5 sm:px-3 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg sm:rounded-xl text-xs font-medium text-slate-200 hover:text-white transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="text-sky-400 sm:mr-1.5">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" x2="12" y1="15" y2="3"></line>
-            </svg>
-            <span class="hidden sm:inline">PDF</span>
-          </button>
+<a href="resume.pdf" download="Muhammad_Usama_CV.pdf" title="Download PDF"
+  class="flex items-center justify-center h-8 sm:h-9 px-2.5 sm:px-3 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] rounded-lg sm:rounded-xl text-xs font-medium text-slate-200 hover:text-white transition-all">
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+    class="text-sky-400 sm:mr-1.5">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+    <polyline points="7 10 12 15 17 10"></polyline>
+    <line x1="12" x2="12" y1="15" y2="3"></line>
+  </svg>
+  <span class="hidden sm:inline">PDF</span>
+</a>
 
           <!-- Print Button -->
           <button onclick="window.print()" title="Print"
